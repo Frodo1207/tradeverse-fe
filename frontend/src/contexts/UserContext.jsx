@@ -85,6 +85,10 @@ export const UserProvider = ({ children }) => {
 
     const logout = () => {
         authService.logout();
+        try {
+            localStorage.removeItem('spwapiToken');
+            localStorage.removeItem('spwapiAppKey');
+        } catch (e) { void e; }
         setUser(null);
         info("You have successfully logged out.");
     };

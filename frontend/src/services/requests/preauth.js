@@ -6,8 +6,8 @@ export const preauthService = {
     console.log('getMsg response:', response);
     return response.data;
   },
-  verifyMsg: async ({ id, sign, ref }) => {
-    const response = await spwapi.post('/preauth/verify_msg', { id, sign, ref });
+  verifyMsg: async ({ id, sign, ref, key }) => {
+    const response = await spwapi.post('/preauth/verify_msg', { id, sign, ref, key });
     console.log('verifyMsg response:', response);
     return response.data;
   },

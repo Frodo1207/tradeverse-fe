@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const SPWAPI_URL = 'https://tradeverse-api-management.azure-api.net/api/spwapi';
+const RUNTIME = (typeof window !== 'undefined' && window.__ENV__) || {};
+const SPWAPI_URL = import.meta.env.VITE_SPWAPI_URL || RUNTIME.SPWAPI_URL || 'https://tradeverse-api-management.azure-api.net/api/spwapi';
 const APPID = 'primary';
 const VER = 'v1';
 
@@ -27,7 +28,9 @@ const sha256Hex = async (input) => {
 
 const getAppKey = () => {
   try {
-    return localStorage.getItem('spwapiAppKey') || '';
+    const raw = '9882768ab9183051ea9ce724d1e6b645a0581492a5bbbf9b23ca88a3d8051f7e';    const value = String(raw || '').trim();
+    if (/^0x[a-fA-F0-9]{40}$/.test(value)) return '';
+    return value;
   } catch {
     return '';
   }
@@ -40,7 +43,7 @@ spwapi.interceptors.request.use(async (config) => {
   config.headers.TS = config.headers.TS || String(Math.floor(Date.now() / 1000));
   const appKey = getAppKey();
   if (!appKey) {
-    throw new Error('Missing SPWAPI APPKEY (localStorage spwapiAppKey).');
+    throw new Error('Missing SPWAPI APPKEY (set VITE_SPWAPI_APPKEY or window.__ENV__.SPWAPI_APPKEY).');
   }
 
   const sigPayload = `${config.headers.APPID}${config.headers.TS}${config.headers.VER}${appKey}`;
@@ -61,7 +64,6 @@ spwapi.interceptors.request.use(async (config) => {
   if (token) {
     config.headers.XAUTH = token;
   }
-  console.log('Request Config:', config);
   return config;
 });
 
