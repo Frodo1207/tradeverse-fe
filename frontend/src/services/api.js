@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 const RUNTIME = (typeof window !== 'undefined' && window.__ENV__) || {};
-const API_URL = RUNTIME.API_URL || import.meta.env.VITE_API_URL || `${window.location.origin}/api`;
+const DEFAULT_API_URL = (typeof window !== 'undefined' && window.location)
+    ? `${window.location.origin}/api`
+    : '/api';
+const API_URL = import.meta.env.VITE_API_URL || RUNTIME.API_URL || DEFAULT_API_URL;
 
 const api = axios.create({
     baseURL: API_URL,

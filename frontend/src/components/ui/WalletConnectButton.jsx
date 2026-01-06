@@ -170,7 +170,7 @@ const WalletConnectButton = ({ onNavigate, mobile = false }) => {
             const signature = await signMessage(wallet.provider, walletAddress, message, wallet.type);
             console.debug('[Wallet] Signature received:', signature?.slice ? signature.slice(0, 10) + '...' : signature);
 
-            const verifyResp = await preauthService.verifyMsg({ id: msgId, sign: signature, ref });
+            const verifyResp = await preauthService.verifyMsg({ id: msgId, sign: signature, ref, key: walletAddress });
             const verifyCode = verifyResp?.code;
             const verifyData = verifyResp?.data;
             const provisionalToken = verifyData?.provisional_token;
