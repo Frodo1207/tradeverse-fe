@@ -28,7 +28,8 @@ const sha256Hex = async (input) => {
 
 const getAppKey = () => {
   try {
-    const raw = '9882768ab9183051ea9ce724d1e6b645a0581492a5bbbf9b23ca88a3d8051f7e';    const value = String(raw || '').trim();
+    const raw = '9882768ab9183051ea9ce724d1e6b645a0581492a5bbbf9b23ca88a3d8051f7e';
+    const value = String(raw || '').trim();
     if (/^0x[a-fA-F0-9]{40}$/.test(value)) return '';
     return value;
   } catch {
