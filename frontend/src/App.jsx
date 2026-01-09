@@ -151,7 +151,7 @@ const App = () => {
           />
 
           {/* Navigation */}
-          <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || currentView !== 'home' ? 'bg-black/30 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-8'}`}>
+          <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || currentView !== 'home' ? 'bg-[#050505]/80 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-8'}`}>
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
               <div
                 className="flex items-center gap-3 cursor-pointer group"
@@ -163,7 +163,7 @@ const App = () => {
                 <span className="text-2xl font-bold tracking-tight font-mono group-hover:text-white transition-colors">NEXUS<span className="text-[#8B5CF6]">.GG</span></span>
               </div>
 
-              {/* Desktop Nav */}
+              {/* Desktop Nav - Completely hidden on mobile */}
               <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wider uppercase">
                 <button
                   onClick={() => handleViewChange('Lobby')}
@@ -235,7 +235,9 @@ const App = () => {
           </nav>
 
           {/* Mobile Menu Overlay */}
-          <div className={`fixed inset-0 z-40 bg-[#050505] transition-transform duration-300 transform ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} md:hidden flex flex-col pt-32 px-6`}>
+          <div className={`fixed inset-0 z-40 bg-[#050505] transition-[transform,opacity] duration-300 transform ${
+            mobileMenuOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'
+          } md:hidden flex flex-col pt-32 px-6`}>
             <div className="flex flex-col gap-6 text-2xl font-black uppercase tracking-tighter">
               <button onClick={() => handleViewChange('home')} className={`text-left py-4 border-b border-white/10 ${currentView === 'home' ? 'text-[#8B5CF6]' : 'text-white'}`}>{t('nav.home')}</button>
               <button onClick={() => handleViewChange('Lobby')} className={`text-left py-4 border-b border-white/10 ${currentView === 'Lobby' ? 'text-[#8B5CF6]' : 'text-white'}`}>{t('nav.games')}</button>
