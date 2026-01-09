@@ -273,7 +273,7 @@ const WalletConnectButton = ({ onNavigate, mobile = false }) => {
                             <ChevronDown size={16} className={`transition-transform ${isChainOpen ? 'rotate-180' : ''}`} />
                         </button>
                         {isChainOpen && (
-                            <div className={`${mobile ? 'w-full' : 'absolute left-0 mt-2 w-44'} bg-[#111] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50`}>
+                            <div className={`${mobile ? 'w-full' : 'absolute left-0 mt-2 w-44'} bg-[#111] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-[999999]`}>
                                 {CHAIN_OPTIONS.map((c) => (
                                     <button
                                         key={c.key}
